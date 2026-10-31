@@ -34,7 +34,7 @@ struct Rect {
 impl Rect {
     fn area(&self)-> u32{
         self.width * self.height
-    }
+    } 
 }
 
 
