@@ -12,7 +12,9 @@ fn main(){
 
     println!("The secret number is: {secret_number}");
 
-    println!("Please input your guess."); 
+    loop {
+        
+     println!("Please input your guess."); 
 
     let mut guess = String::new(); 
 
@@ -22,14 +24,15 @@ fn main(){
 
         let guess : u32 = guess.trim().parse().expect("Please type a number"); // guess.trim() -> method is use will elimitate any whitespace
         //parse() -> method will converts a string to another type. Here, we use it to convert from a string to a number.
-
-    println!("You guessed: {guess}");
+    
+        
+            println!("You guessed: {guess}");
 
     // compare two numbers
-    match guess.cmp(&secret_number){
+      match guess.cmp(&secret_number){
         Ordering::Less => println!("Too small!"),
         Ordering::Greater => println!("Too big!"),
         Ordering::Equal => println!("You win")
+       }
     }
-
 }
