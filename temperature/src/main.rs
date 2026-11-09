@@ -10,8 +10,19 @@ use std::io;
 
 fn main(){
 	
+ println!("Enter The Temperaute In Celsius");
 	
+ let mut temp_celsius = String::new(); 
+	
+	io::stdin()
+	  .read_line(&mut temp_celsius)
+	  .expect("Failed to read line");
 
+	  let temp_celsius : f32 = temp_celsius.trim().parse().expect("Please type auh number"); 
+		
+ 		println!("Temperature in Celsius: {}°C", temp_celsius);
 
+	let fahrenheit : f32 = (temp_celsius * 1.8) + 32.0_f32; 
 
+	println!("Temperature in Fahrenheit: {}°F", fahrenheit);
 } 
