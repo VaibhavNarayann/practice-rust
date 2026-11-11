@@ -1,4 +1,6 @@
-use clap::Parser; 
+use clap::Parser;  
+use anyhow::{Context, Result};
+
 
 #[derive(Parser)]
 struct Cli {
@@ -9,8 +11,7 @@ struct Cli {
 }
 
 
-
-fn main()-> Return<(), Box<dyn std::error::Error >> {
+fn main() -> Result<()>{
     // if i don't you struct
     // let pattern = args().nth(1).expect("no pattern given"); 
     // let path = args().nth(2).expect("no path given"); 
@@ -22,17 +23,15 @@ fn main()-> Return<(), Box<dyn std::error::Error >> {
     let args = Cli::parse(); 
 
     // read_to_string ->  reads its entire contents into a standard String - low performance.
-    let content = std::fs::read_to_string(&args.path).expect("couldn't real file");
-    let content = match result {
-        Ok(content) => { content }, 
-        // Err(error) => { panic! ("Can't deal with {}, just exit here", error); }
-        Err(error) => {return Err (error.into()); }
-    }
-        println!("file content: {}", content);
+    let content = std::fs::read_to_string(&args.path)
+        .with_context(|| format!("could not read file `{}`", args.path.display()))?;
+    
 
         for line in content.lines() { 
             if line.contains(&args.pattern){
                 println!("{}", line);
             }
         }
+
+        Ok(())
 }
